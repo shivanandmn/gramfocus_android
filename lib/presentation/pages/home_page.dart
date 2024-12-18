@@ -248,6 +248,8 @@ class HomePage extends StatelessWidget {
   void _analyzeRecording(BuildContext context, RecordingState state) async {
     await state.analyzeRecording();
     if (state.status == RecordingStatus.completed && context.mounted) {
+      // Reset the recording state before navigating
+      state.reset();
       Navigator.push(
         context,
         MaterialPageRoute(
