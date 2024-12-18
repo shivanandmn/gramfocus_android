@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "923042421428",
+    "project_id": "gramfocus-project",
+    "storage_bucket": "gramfocus-project.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923042421428:android:38de033f62bfd5935e15e1",
+        "android_client_info": {
+          "package_name": "ai.experimenter.gramfocus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdM60NhWCrcO_p3EYC5469ceY-lhCAqs4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
