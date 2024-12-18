@@ -177,18 +177,6 @@ class HomePage extends StatelessWidget {
                           children: [
                             _buildMainActionButton(context, recordingState),
                             const SizedBox(height: 16),
-                            // Upload Button
-                            if (recordingState.status != RecordingStatus.recording)
-                              ElevatedButton.icon(
-                                onPressed: recordingState.isLoading
-                                    ? null
-                                    : () => recordingState.pickAudioFile(),
-                                icon: const Icon(Icons.upload_file),
-                                label: const Text(AppStrings.uploadAudio),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.accent,
-                                ),
-                              ),
                             if (recordingState.status == RecordingStatus.stopped)
                               Padding(
                                 padding: const EdgeInsets.only(top: 16.0),

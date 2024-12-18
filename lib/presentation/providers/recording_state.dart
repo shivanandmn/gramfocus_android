@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import '../../data/services/audio_recorder_service.dart';
-import '../../data/services/file_picker_service.dart';
 import '../../data/repositories/audio_repository.dart';
 import '../../data/models/audio_analysis_response.dart';
 import '../../core/config/api_endpoints.dart';
@@ -19,7 +18,6 @@ enum RecordingStatus {
 class RecordingState extends ChangeNotifier {
   AudioRecorderService _recorderService;
   AudioRepository _audioRepository;
-  FilePickerService _filePickerService;
   
   RecordingStatus _status = RecordingStatus.initial;
   String? _errorMessage;
@@ -33,10 +31,8 @@ class RecordingState extends ChangeNotifier {
   RecordingState({
     required AudioRecorderService recorderService,
     required AudioRepository audioRepository,
-    required FilePickerService filePickerService,
   })  : _recorderService = recorderService,
-        _audioRepository = audioRepository,
-        _filePickerService = filePickerService;
+        _audioRepository = audioRepository;
 
   // Getters
   RecordingStatus get status => _status;
@@ -113,33 +109,6 @@ class RecordingState extends ChangeNotifier {
     }
   }
 
-  Future<void> pickAudioFile() async {
-    try {
-      _isLoading = true;
-      notifyListeners();
-
-      final result = await _filePickerService.pickAudioFile();
-      
-      if (result != null) {
-        if (result.error != null) {
-          _status = RecordingStatus.error;
-          setError(result.error!);
-        } else if (result.file != null) {
-          _audioFile = result.file;
-          _status = RecordingStatus.stopped;
-          _errorMessage = null;
-          _error = null;
-        }
-      }
-    } catch (e) {
-      _status = RecordingStatus.error;
-      setError(e.toString());
-    } finally {
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
-
   Future<void> analyzeRecording() async {
     if (_audioFile == null) {
       setError('No recording available');
@@ -183,19 +152,16 @@ class RecordingState extends ChangeNotifier {
   void updateServices({
     required AudioRecorderService recorderService,
     required AudioRepository audioRepository,
-    required FilePickerService filePickerService,
   }) {
     // No need to update if services are the same
     if (_recorderService == recorderService &&
-        _audioRepository == audioRepository &&
-        _filePickerService == filePickerService) {
+        _audioRepository == audioRepository) {
       return;
     }
     
     // Update the services
     _recorderService = recorderService;
     _audioRepository = audioRepository;
-    _filePickerService = filePickerService;
     notifyListeners();
   }
 
