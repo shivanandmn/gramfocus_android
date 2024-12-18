@@ -9,6 +9,25 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  # State Management
+  provider: ^6.1.1
+  # Audio Recording
+  record: ^5.0.1
+  # File Picking
+  file_picker: ^6.1.1
+  # Audio Player
+  just_audio: ^0.9.36
+  # HTTP Client
+  dio: ^5.4.0
+  # Path Provider
+  path_provider: ^2.1.1
+  # Permission Handler
+  permission_handler: ^11.3.1
+  # Local Storage
+  shared_preferences: ^2.2.2
+  # App Settings
+  app_settings: ^5.1.1
+  device_info_plus: ^11.2.0
 
 dev_dependencies:
   flutter_test:
